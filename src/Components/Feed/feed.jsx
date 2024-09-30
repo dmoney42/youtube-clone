@@ -15,9 +15,11 @@ import { API_KEY } from '../../data'
 const feed = ({category}) => {
 
      const [data,setData] = useState([]);
+     console.log(data , "data123") //this line is for testing purposes when inspecting the data in google chrome console
 
      const fetchData = async () => {
-        const videoList_url = `https://youtube.googleapis.com/youtube/v3/videos?chart=mostPopular&maxResults=50&videoCategoryId=0&key=${API_KEY}`;
+        // const videoList_url = `https://youtube.googleapis.com/youtube/v3/videos?chart=mostPopular&maxResults=50&videoCategoryId=0&key=${API_KEY}`;
+        const videoList_url =  `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=0&key=${API_KEY}`;
         await fetch(videoList_url)
         .then(response=>response.json())
         .then(data=>setData(data.items))
@@ -41,13 +43,14 @@ const feed = ({category}) => {
             
             
             {data.map((item,index)=>{
+                console.log(item , "item 44")
                 return(
-                <Link to={`video/20/4521`} className='card'>
-                    <img src={thumbnail1} alt="" />
-                    <h2>Best channel to learn coding that will help you to be a web developer</h2>
-                    <h3>Greatstack</h3>
-                    <p>15k views &bull; 2 days ago</p>
-                </Link>  
+                    <Link to={`video/${item.snippet.categoryId}/${item.id}`} className='card'>
+                        <img src={thumbnail1} alt="" />
+                        <h2>Best channel to learn coding that will help you to be a web developer</h2>
+                        <h3>Greatstack</h3>
+                        <p>15k views &bull; 2 days ago</p>
+                    </Link>  
                 )
             })}
             
