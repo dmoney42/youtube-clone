@@ -10,7 +10,7 @@ import thumbnail6 from '../../assets/thumbnail6.png'
 import thumbnail7 from '../../assets/thumbnail7.png'
 import thumbnail8 from '../../assets/thumbnail8.png'
 import { Link } from 'react-router-dom'
-import { API_KEY } from '../../data'
+import { API_KEY, value_converter } from '../../data'
 
 const feed = ({category}) => {
 
@@ -40,16 +40,14 @@ const feed = ({category}) => {
     <div className="feed">
        
 
-            
-            
             {data.map((item,index)=>{
                 console.log(item , "item 44")
                 return(
                     <Link to={`video/${item.snippet.categoryId}/${item.id}`} className='card'>
-                        <img src={thumbnail1} alt="" />
-                        <h2>Best channel to learn coding that will help you to be a web developer</h2>
-                        <h3>Greatstack</h3>
-                        <p>15k views &bull; 2 days ago</p>
+                        <img src={item.snippet.thumbnails.medium.url} alt="" />
+                        <h2>{item.snippet.title}</h2>
+                        <h3>{item.snippet.channelTitle}</h3>
+                        <p>{value_converter(item.statistics.viewCount)} &bull; 2 days ago</p>
                     </Link>  
                 )
             })}
