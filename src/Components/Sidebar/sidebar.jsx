@@ -17,6 +17,12 @@ import megan from '../../assets/megan.png'
 import cameron from '../../assets/cameron.png'
 
 const sidebar = ({sidebar,category,setCategory}) => {
+
+    //Have you write any code of https?
+
+    //const [categories, SetCategories] = useDa one secone I need to commit it git
+ 
+
   return (
     /*as seen in the line below we had to use the ` character to create the dynamic classes
     not the ' character */
