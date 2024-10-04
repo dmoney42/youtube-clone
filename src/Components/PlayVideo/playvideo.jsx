@@ -9,12 +9,14 @@ import jack from '../../assets/jack.png'
 import user_profile from '../../assets/user_profile.jpg'
 
 
-const playvideo = () => {
+const playvideo = ({videoId}) => {
+
   return (
     <div className='play-video'>
-        <video src={video1} controls autoPlay muted>
+        {/*<video src={video1} controls autoPlay muted>
         Your browser does not support the video tag.
-        </video>
+        </video>*/}
+        <iframe src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     
        <h3>Best Youtube Channel To Lean Web Development</h3>
 

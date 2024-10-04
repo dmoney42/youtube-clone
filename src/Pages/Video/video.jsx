@@ -2,11 +2,15 @@ import React from 'react'
 import './video.css'
 import PlayVideo from '../../Components/PlayVideo/playvideo'
 import Recommended from '../../Components/Recommended/recommended'
+import { useParams } from 'react-router-dom'
 
 const video = () => {
+
+  const {videoId,categoryId} = useParams();
+
   return (
     <div className='play-container'>
-      <PlayVideo/>
+      <PlayVideo videoId={videoId}/>
       <Recommended/>
     </div> 
   )
