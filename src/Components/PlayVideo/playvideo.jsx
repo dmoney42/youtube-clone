@@ -16,6 +16,7 @@ import moment from 'moment';
 
    const [apiData,setApiData] = useState(null);
    const [channelData,setChannelData] = useState(null);
+   const [commentData,setCommentData] = useState([]);
 
    const fetchVideoData = async () => {
       //Fetching Video's data
@@ -28,6 +29,10 @@ import moment from 'moment';
       //fetching channel data
       const channelData_url = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${apiData.snippet.channelId}&key=${API_KEY}`
       await fetch(channelData_url).then(res=>res.json()).then(data=>setChannelData(data.items[0]))
+
+      //fetching Comment Data
+      const comment_url = `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=${videoId}&key=${API_KEY}`
+      await fetch(comment_url).then(res=>res.json()).then(data=>setCommentData(data.items))
     }
 
     
@@ -94,18 +99,17 @@ import moment from 'moment';
           <h4>{apiData?value_converter(apiData.statistics.commentCount):"comment count not pulled from youtube api"} Comments</h4>
               {/* to dynamcially pull the comments under a videi
             we have to create another youtube api link under the commentThreads api section of youtube api */}
-              <div className="comment">
-                <img src={user_profile} alt="" />
-                <div name="userComment">
-                  <h3>Jack Nicholson <span>1 day ago</span></h3>
-                  <p>Awesome video. Very helpful. I just subscribed.</p>
-                    <div className="comment-action">
-                      <img src={like} alt="" />
-                      <span>244</span>
-                      <img src={dislike} alt="" />
-                    </div>
-                </div>{/* end userComment */}
-              </div>{/* end comment div */}
+            
+            {/*
+                {commentData.map((item,index)=>{
+                    return(
+
+                      console.log("hello");  
+
+
+                    )
+                })} */}
+           
 
               <div className="comment">
                 <img src={user_profile} alt="" />
@@ -120,6 +124,8 @@ import moment from 'moment';
                 </div>{/* end userComment */}
               </div>{/* end comment div */}
 
+              {/* we comment out the hard coded comments because we are dynamically pulling comments on
+              each
               <div className="comment">
                 <img src={user_profile} alt="" />
                 <div name="userComment">
@@ -130,8 +136,8 @@ import moment from 'moment';
                       <span>244</span>
                       <img src={dislike} alt="" />
                     </div>
-                </div>{/* end userComment */}
-              </div>{/* end comment div */}
+                </div>
+              </div>
 
               <div className="comment">
                 <img src={user_profile} alt="" />
@@ -143,9 +149,8 @@ import moment from 'moment';
                       <span>244</span>
                       <img src={dislike} alt="" />
                     </div>
-                </div>{/* end userComment */}
-              </div>{/* end comment div */}
-
+                </div>
+              </div>
 
               <div className="comment">
                 <img src={user_profile} alt="" />
@@ -157,8 +162,10 @@ import moment from 'moment';
                       <span>244</span>
                       <img src={dislike} alt="" />
                     </div>
-                </div>{/* end userComment */}
-              </div>{/* end comment div */}
+                </div>
+              </div>
+
+                  */}
 
         </div>{/*end vid-description */}
 
